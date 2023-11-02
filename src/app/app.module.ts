@@ -8,7 +8,6 @@ import { HeaderComponent } from './header/header.component';
 import { AuthInterceptorService } from './auth/auth-interceptor.service';
 
 import { AppRoutingModule } from './app-routing.module';
-import { RecipeModule } from './recipes/recipe.module';
 import { ShoppingModule } from './shopping-list/shopping.module';
 import { AuthModule } from './auth/auth.module';
 import { SharedModule } from './shared/shared.module';
@@ -21,7 +20,6 @@ import { SharedModule } from './shared/shared.module';
     ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
-    RecipeModule,
     ShoppingModule,
     AuthModule,
     SharedModule,
