@@ -8,7 +8,6 @@ import { HeaderComponent } from './header/header.component';
 import { AuthInterceptorService } from './auth/auth-interceptor.service';
 
 import { AppRoutingModule } from './app-routing.module';
-import { AuthModule } from './auth/auth.module';
 import { SharedModule } from './shared/shared.module';
 
 @NgModule({
@@ -19,7 +18,6 @@ import { SharedModule } from './shared/shared.module';
     ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
-    AuthModule,
     SharedModule,
   ],
   /* If there are more objects in providers, we can move them to a 
