@@ -8,7 +8,6 @@ import { HeaderComponent } from './header/header.component';
 import { AuthInterceptorService } from './auth/auth-interceptor.service';
 
 import { AppRoutingModule } from './app-routing.module';
-import { ShoppingModule } from './shopping-list/shopping.module';
 import { AuthModule } from './auth/auth.module';
 import { SharedModule } from './shared/shared.module';
 
