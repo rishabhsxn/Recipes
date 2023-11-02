@@ -20,7 +20,6 @@ import { SharedModule } from './shared/shared.module';
     ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
-    ShoppingModule,
     AuthModule,
     SharedModule,
   ],
