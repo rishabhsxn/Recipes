@@ -10,6 +10,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared/shared.module';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
+import { AppReducer } from './store/app.reducer';
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent],
@@ -18,7 +19,7 @@ import { EffectsModule } from '@ngrx/effects';
     HttpClientModule,
     AppRoutingModule,
     SharedModule,
-    StoreModule.forRoot({}, {}),
+    StoreModule.forRoot(AppReducer),
     EffectsModule.forRoot([]),
   ],
   /* If there are more objects in providers, we can move them to a 
