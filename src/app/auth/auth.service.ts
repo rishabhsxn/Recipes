@@ -1,10 +1,14 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, Subject, throwError } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
-import { User } from './user.model';
 import { Router } from '@angular/router';
+import { Observable, throwError } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
+
+import { User } from './user.model';
 import { environment } from 'src/environment/environment';
+import * as AuthActions from './store/auth.actions';
+import { AppState } from '../store/state';
 
 export interface AuthResponse {
   idToken: string;
@@ -19,10 +23,13 @@ export interface AuthResponse {
   providedIn: 'root',
 })
 export class AuthService {
-  user = new BehaviorSubject<User>(null);
   private tokenExpirationTimer: any;
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private store: Store<AppState>
+  ) {}
 
   signUp(email: string, password: string): Observable<AuthResponse> {
     return this.http
@@ -73,7 +80,7 @@ export class AuthService {
   }
 
   logout(): void {
-    this.user.next(null);
+    this.store.dispatch(AuthActions.Logout());
     this.router.navigate(['/auth']);
     localStorage.removeItem('userData');
     if (this.tokenExpirationTimer) clearInterval(this.tokenExpirationTimer);
@@ -104,7 +111,16 @@ export class AuthService {
     );
 
     if (loadedUser.token) {
-      this.user.next(loadedUser);
+      this.store.dispatch(
+        AuthActions.AuthSuccess({
+          payload: {
+            id: userData.id,
+            email: userData.email,
+            token: userData._token,
+            tokenExpirationDate: new Date(userData._tokenExpirationDate),
+          },
+        })
+      );
       this.autoLogoutInit(
         new Date(userData._tokenExpirationDate).getTime() - new Date().getTime()
       );
@@ -126,7 +142,11 @@ export class AuthService {
       token,
       tokenExpirationDate
     );
-    this.user.next(loggedUser);
+    this.store.dispatch(
+      AuthActions.AuthSuccess({
+        payload: { id: userId, email, token, tokenExpirationDate },
+      })
+    );
     localStorage.setItem('userData', JSON.stringify(loggedUser));
     this.autoLogoutInit(tokenExpiresInSec * 1000);
   }
