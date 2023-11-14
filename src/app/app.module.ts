@@ -11,6 +11,7 @@ import { AuthInterceptorService } from './auth/auth-interceptor.service';
 import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared/shared.module';
 import { AppReducer } from './store/app.reducer';
+import { AuthEffects } from './auth/store/auth.effects';
 import { environment } from 'src/environment/environment';
 
 @NgModule({
@@ -21,7 +22,7 @@ import { environment } from 'src/environment/environment';
     AppRoutingModule,
     SharedModule,
     StoreModule.forRoot(AppReducer),
-    EffectsModule.forRoot([]),
+    EffectsModule.forRoot([AuthEffects]),
     StoreDevtoolsModule.instrument({
       logOnly: environment.production,
       trace: true,

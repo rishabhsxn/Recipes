@@ -4,8 +4,8 @@ import { Store } from '@ngrx/store';
 import { map } from 'rxjs/operators';
 
 import { DataStorageService } from '../shared/data-storage.service';
-import { AuthService } from '../auth/auth.service';
 import { AppState } from '../store/state';
+import * as AuthActions from '../auth/store/auth.actions';
 
 @Component({
   selector: 'app-header',
@@ -19,7 +19,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   constructor(
     private dataStorageService: DataStorageService,
-    private authService: AuthService,
     private store: Store<AppState>
   ) {}
 
@@ -46,6 +45,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   onLogout(): void {
-    this.authService.logout();
+    this.store.dispatch(AuthActions.Logout());
   }
 }
