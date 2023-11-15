@@ -17,8 +17,12 @@ export const ShoppingListReducer = createReducer(
 
   on(ShoppingActions.UpdateIngredient, (state, action) => {
     const ingredient = state.ingredients[action.payload.id];
+    const updatedIngredient = {
+      ...ingredient,
+      ...action.payload.updatedIngredient,
+    };
     const updatedIngredients = [...state.ingredients];
-    updatedIngredients[action.payload.id] = ingredient;
+    updatedIngredients[action.payload.id] = updatedIngredient;
     return {
       ...state,
       ingredients: updatedIngredients,
