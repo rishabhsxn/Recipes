@@ -11,7 +11,7 @@ export const RecipeReducer = createReducer(
     recipes: [...state.recipes, action.payload.recipe],
   })),
 
-  on(RecipeActions.SaveRecipes, (state, action) => ({
+  on(RecipeActions.SetRecipes, (state, action) => ({
     ...state,
     recipes: [...action.payload.recipes],
   })),

@@ -8,6 +8,7 @@ export enum RecipeActionTypes {
   DELETE_RECIPE = '[Recipe] Delete Recipe',
   FETCH_RECIPES = '[Recipe] Fetch Recipes',
   SAVE_RECIPES = '[Recipe] Save Recipes',
+  SET_RECIPES = '[Recipe] Set Recipes',
 }
 
 // Action Creators
@@ -28,7 +29,9 @@ export const DeleteRecipe = createAction(
 
 export const FetchRecipes = createAction(RecipeActionTypes.FETCH_RECIPES);
 
-export const SaveRecipes = createAction(
-  RecipeActionTypes.SAVE_RECIPES,
+export const SaveRecipes = createAction(RecipeActionTypes.SAVE_RECIPES);
+
+export const SetRecipes = createAction(
+  RecipeActionTypes.SET_RECIPES,
   props<{ payload: { recipes: Recipe[] } }>()
 );
